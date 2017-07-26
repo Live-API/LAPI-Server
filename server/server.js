@@ -8,7 +8,7 @@ const PORT = 4000;
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
-app.use(express.static(path.join(__dirname, '..client/public'));
+app.use('/static', express.static(path.join(__dirname, '../client/public')));
 
 app.get('/', (req, res) => {
     res.send('Home page');
