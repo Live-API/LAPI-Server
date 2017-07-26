@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+mongoose.connect('localhost:27017');
 
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');

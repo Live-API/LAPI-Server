@@ -3,18 +3,13 @@ const bcrypt = require('bcryptjs');
 
 const userController = {};
 
-userController.getAllUsers = (next) => {
-  User.find({}, next);
-};
-
 /**
 * createUser - create a new User model and then save the user to the database.
 */
-
 userController.createUser = async (req, res, next) => {
   // Create a user
   try {
-    const user = new User(req.body);
+    const user = new User({username: 'test1', password: 'test2'});//req.body);
     // bcrypt being done in mongoose middleware in userModel
     res.locals.userid = (await user.save())._id;
     next();
