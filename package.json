@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "pgrep mongod || mongod --dbpath db/data --fork --logpath db/logs/mongodb.log",
     "start": "node server/server.js",
     "watch": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,8 +20,12 @@
   },
   "homepage": "https://github.com/Live-API/LAS#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.15.3",
-    "mongodb": "^2.2.30"
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.4",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

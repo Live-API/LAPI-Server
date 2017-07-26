@@ -1,10 +1,23 @@
 const express = require('express');
+const pug = require('pug');
+const path = require('path');
+const userController = require('./user/userController.js');
+
 const app = express();
+const PORT = 4000;
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '../client/views'));
 
 app.get('/', (req, res) => {
     res.send('Home page');
-})
+});
 
-app.listen(4000, () => {
-    console.log('App is listening on Port 4000');
-})
+app.get('/config', userController.createUser, (req, res) => {
+  //res.send('config page ' + res.locals.userid);
+  res.render('createUser', {uid: res.locals.userid});
+});
+
+app.listen(PORT, () => {
+    console.log(`App is listening on Port ${PORT}`);
+});
