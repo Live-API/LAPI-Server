@@ -23,7 +23,9 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.15.3",
     "mongodb": "^2.2.30",
-    "mongoose": "^4.11.4"
+    "mongoose": "^4.11.4",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
