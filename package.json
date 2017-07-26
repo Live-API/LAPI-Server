@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "mongod --dbpath db/data --fork --logpath db/logs/mongodb.log",
+    "prestart": "pgrep mongod || mongod --dbpath db/data --fork --logpath db/logs/mongodb.log",
     "start": "node server/server.js",
-    "poststop": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
     "watch": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
