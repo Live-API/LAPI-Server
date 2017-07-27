@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send('Home page');
 });
 
-app.get('/config', userController.createUser, (req, res) => {
+app.get('/config', (req, res) => {
   res.render('createUser', {uid: res.locals.userid});
 });
 

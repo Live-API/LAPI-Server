@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Button } from 'semantic-ui-react'
+import { Card, Input, Divider, Button } from 'semantic-ui-react'
 
-class CreateUserDialog extends Component {
-  render() {
-    return (
-      <div>
-        <form>
-          <label>
-            Name:
-            <input type="text" name="name" />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <Button>click here!</Button>
-      </div>
-    )
-  }
-}
+const CreateUserDialog = () => (
+  <Card fluid color='black'>
+    <Card.Content>
+      <Card.Header>
+        Create User
+      </Card.Header>
+    </Card.Content>
+    <Card.Content>
+      <Input fluid icon='Add User' iconPosition='left' placeholder='Username' />
+      <Divider hidden />
+      <Input fluid icon='Lock' iconPosition='left' placeholder='Password' />
+      <Divider />
+      <Button fluid>Register</Button>
+    </Card.Content>
+  </Card>
+)
 
 export default CreateUserDialog;
