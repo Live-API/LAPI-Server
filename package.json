@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Live-API/LAS#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "crawler": "^1.0.5",
     "express": "^4.15.3",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.4",
