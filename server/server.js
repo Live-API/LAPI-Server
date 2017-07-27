@@ -8,13 +8,13 @@ const PORT = 4000;
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
+app.use('/static', express.static(path.join(__dirname, '../client/public')));
 
 app.get('/', (req, res) => {
     res.send('Home page');
 });
 
-app.get('/config', userController.createUser, (req, res) => {
-  //res.send('config page ' + res.locals.userid);
+app.get('/config', (req, res) => {
   res.render('createUser', {uid: res.locals.userid});
 });
 
