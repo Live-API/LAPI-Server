@@ -9,15 +9,18 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   // Create a user
   try {
-    const user = new User({
-      username: res.locals.username,
-      password: res.locals.password
-    });
-    
-    if (res.locals.admin !== undefined) user.admin = res.locals.admin;
-    
-    // bcrypt being done in mongoose middleware in userModel
-    res.locals.userid = (await user.save())._id;
+    // If there is a user to create
+    if (res.locals.newUser) {
+      const user = new User({
+        username: res.locals.newUser.username,
+        password: res.locals.newUser.password
+      });
+
+      if (res.locals.admin !== undefined) user.admin = res.locals.admin;
+
+      // bcrypt being done in mongoose middleware in userModel
+      res.locals.userid = (await user.save())._id;
+    }
     next();
   } catch (err) {
     // Send an error message
@@ -45,5 +48,26 @@ userController.verifyUser = (req, res, next) => {
     }
   });
 };
+
+/**
+* Checks if this is the first admin to be created
+* If so, then parses the body as an admin user
+* Else, returns an error
+*/
+userController.checkFirstUser = async (req, res, next) => {
+  // If an admin already exists, return false
+  if (await User.findOne({ admin: true }) !== null) {
+    res.locals.newUser = false;
+    next();
+  }
+  else {
+    res.locals.newUser = {
+      username: req.body.username,
+      password: req.body.password,
+      admin: true,
+    }
+    next();
+  }
+}
 
 module.exports = userController;
