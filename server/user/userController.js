@@ -9,12 +9,19 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   // Create a user
   try {
-    const user = new User({username: 'test'+Math.random(), password: 'test2'});//req.body);
+    const user = new User({
+      username: res.locals.username,
+      password: res.locals.password
+    });
+    
+    if (res.locals.admin !== undefined) user.admin = res.locals.admin;
+    
     // bcrypt being done in mongoose middleware in userModel
     res.locals.userid = (await user.save())._id;
     next();
   } catch (err) {
     // Send an error message
+    console.log('failure!', err);
     res.send(err);
   }
 };

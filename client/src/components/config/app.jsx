@@ -8,7 +8,7 @@ class App extends Component {
   
   // POSTS to server to create the initial admin user
   async createAdmin(data) {
-//    const route = '/config/admin';
+    const route = '/config/admin';
 //    const request = new XMLHttpRequest();
 //    request.open('POST', route, true);
 //    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
