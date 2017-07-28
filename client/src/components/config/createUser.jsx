@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Card, Input, Divider, Button, Form } from 'semantic-ui-react'
+import { Card, Input, Divider, Button, Form, Icon } from 'semantic-ui-react'
 
 class CreateUserDialog extends Component {
   constructor(props) {
