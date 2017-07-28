@@ -18,7 +18,16 @@ module.exports = {
         include: path.join(__dirname, 'client/src'),
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          presets: [
+            'react', 
+            ['env', { 
+              "modules": false,
+              "targets": {
+                "browsers": ["last 2 Chrome versions"]
+              }
+            }]
+          ],
+          'plugins': [],
         }
       }
     ]
