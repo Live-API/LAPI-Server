@@ -26,7 +26,6 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.props);
     
     // Is this the first time to this page?
     const card = this.props.firstTime === 'true' ? 
@@ -35,7 +34,7 @@ class App extends Component {
       <CreateUserDialog type='administrator' submission={this.createAdmin}/> :
     
       // Display the info dialog
-      <InfoDialog header='testHeader' description='testDescription' link='google.com' linkText='google'/>;
+      <InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/>;
     
     // So grid elements are centered on entire page
     const gridStyle = { height: '100%' }

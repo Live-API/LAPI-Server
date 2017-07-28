@@ -11,12 +11,7 @@ userController.createUser = async (req, res, next) => {
   try {
     // If there is a user to create
     if (res.locals.newUser) {
-      const user = new User({
-        username: res.locals.newUser.username,
-        password: res.locals.newUser.password
-      });
-
-      if (res.locals.admin !== undefined) user.admin = res.locals.admin;
+      const user = new User(res.locals.newUser);
 
       // bcrypt being done in mongoose middleware in userModel
       res.locals.userid = (await user.save())._id;
