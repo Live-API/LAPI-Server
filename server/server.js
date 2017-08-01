@@ -13,8 +13,9 @@ app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('Home page');
+// Testing this index.html page to get the DOM pointer to work
+app.get('/static', (req, res) => {
+    res.sendFile(path.join(__dirname + './../index.html'));
 });
 
 app.get('/config', 
