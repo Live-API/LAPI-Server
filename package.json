@@ -6,7 +6,6 @@
   "scripts": {
     "prestart": "pgrep mongod || mongod --dbpath db/data --fork --logpath db/logs/mongodb.log",
     "start": "nodemon server/server.js",
-    "watch": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -46,8 +45,5 @@
     "react-hot-loader": "^1.3.1",
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.11.0"
-  },
-  "babel": {
-    "plugins": ["transform-async-to-generator"]
   }
 }
