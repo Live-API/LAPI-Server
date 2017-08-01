@@ -4,6 +4,6 @@ import { render } from 'react-dom';
 import App from './components/config/app.jsx';
 
 render(
-  <App />,
+  <App firstTime={firstTime} />,
   document.getElementById('root')
 );
