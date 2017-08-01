@@ -3,6 +3,7 @@ const pug = require('pug');
 const path = require('path');
 const bodyParser = require('body-parser');
 const userController = require('./user/userController.js');
+const crawlerController = require('./crawler/crawlerController.js');
 
 const app = express();
 const PORT = 4000;
@@ -23,6 +24,8 @@ app.get('/config',
     res.render('createUser', {firstTime: !!res.locals.newUser});
   }
 );
+
+app.get('endpoint', crawlerController.getCache);
 
 app.post('/config/admin', 
   userController.checkFirstUser,
