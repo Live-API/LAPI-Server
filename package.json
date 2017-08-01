@@ -47,6 +47,8 @@
     "webpack-dev-middleware": "^1.11.0"
   },
   "babel": {
-    "plugins": ["transform-async-to-generator"]
+    "plugins": [
+      "transform-async-to-generator"
+    ]
   }
 }
