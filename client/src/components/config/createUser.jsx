@@ -36,11 +36,11 @@ class CreateUserDialog extends Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
               <label>Username</label>
-              <Input fluid icon='Add User' iconPosition='left' placeholder='Username' name='username' onChange={this.handleChange} />
+              <Input fluid icon='add user' iconPosition='left' placeholder='Username' name='username' onChange={this.handleChange} />
             </Form.Field>
             <Form.Field>
               <label>Password</label>
-              <Input fluid icon='Lock' iconPosition='left' placeholder='Password' name='password' onChange={this.handleChange} />
+              <Input fluid icon='lock' iconPosition='left' placeholder='Password' name='password' onChange={this.handleChange} />
             </Form.Field>
             <Divider />
             <Button fluid color='green' type='submit'>Register</Button>
