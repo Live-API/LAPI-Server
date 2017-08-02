@@ -25,13 +25,10 @@ const crawlerController = {
     if (intervals[endpoint]) clearInterval(intervals[endpoint]);
     
     // Create a new interval
-    const c = new NodeCrawler();
     intervals[endpoint] = setInterval(
-      () => c.c.queue('https://www.trulia.com/CA/San_Francisco/'),
+      () => NodeCrawler('https://www.trulia.com/CA/San_Francisco/'),
       interval
     );
-    
-    console.log(intervals);
   }
 }
 
