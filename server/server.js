@@ -38,3 +38,5 @@ app.post('/config/admin',
 app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
 });
+
+crawlerController.startScrapeInterval('pizza', 10000);
