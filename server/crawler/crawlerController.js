@@ -19,6 +19,7 @@ const crawlerController = {
   },
   
   // Sets up a scrape to run on an interval
+  // Currently scrapes trulia only
   startScrapeInterval: (endpoint, interval) => {
     // If the endpoint already has an interval
       // Stop the interval

@@ -39,4 +39,5 @@ app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
 });
 
-crawlerController.startScrapeInterval('pizza', 10000);
+// Demo interval scrape
+//crawlerController.startScrapeInterval('pizza', 10000);
