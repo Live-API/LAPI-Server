@@ -26,7 +26,7 @@ const crawlerController = {
     
     // Create a new interval
     intervals[endpoint] = setInterval(
-      () => NodeCrawler('https://www.trulia.com/CA/San_Francisco/'),
+      () => NodeCrawler('https://www.trulia.com/CA/San_Francisco/', endpoint),
       interval
     );
   }
