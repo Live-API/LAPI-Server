@@ -15,9 +15,29 @@ done
 
 # If no .LAS_status file, or force reinstall is selected
 if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
-  # Install NodeJS (use https://gist.github.com/isaacs/579814)
 
-  # Install npm (probably included with Node)
+  # Install NodeJS
+  # Checks for and uses brew or apt-get. Else may use https://gist.github.com/isaacs/579814
+  
+  # Mac OS
+  if hash brew 2>/dev/null; then
+    echo "Installing Node with homebrew"
+    brew install node
+  else
+    # Ubuntu/Debian
+    if hash apt-get 2>/dev/null; then
+      echo "Installing Node with apt-get"
+      curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      sudo apt-get install -y nodejs
+    else
+      # Enterprise Linus (e.g. Amazon Linux)
+      if hash yum 2>/dev/null; then
+        echo "Installing Node with yum"
+        curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+        sudo yum -y install nodejs
+      fi
+    fi
+  fi
 
   # Install npm dependencies
   echo Installing dependencies from npm
