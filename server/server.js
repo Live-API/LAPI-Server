@@ -25,7 +25,7 @@ app.get('/config',
   }
 );
 
-app.get('endpoint', crawlerController.getCache);
+app.get('/endpoint', crawlerController.getCache);
 
 app.post('/config/admin', 
   userController.checkFirstUser,
@@ -38,3 +38,6 @@ app.post('/config/admin',
 app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
 });
+
+// Demo interval scrape
+//crawlerController.startScrapeInterval('pizza', 10000);

@@ -12,7 +12,6 @@ const crawlerSchema = new Schema({
   endpoint: {type: String, required: true}, // config file
   scrape_date: {type: Date, default: Date.now(), required: true},
   data: {type: Object, required: true}, // crawler
-  interval: {type: Number, default: INTERVAL, required: true}, // Amount of time between scrapes, in seconds
 });
 
 module.exports = mongoose.model("Crawler", crawlerSchema);
