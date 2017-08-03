@@ -1,19 +1,20 @@
 {
-  "name": "las",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "liveapi",
+  "version": "0.0.1",
+  "description": "LiveAPI: A few-click-install, end-to-end scraping server",
   "scripts": {
     "prestart": "pgrep mongod || (mkdir -p db/data && mkdir -p db/logs && mongod --dbpath db/data --fork --logpath db/logs/mongodb.log)",
     "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --colors -w"
+    "build": "webpack --colors -w",
+    "go": "./bin/start.sh",
+    "update": "./bin/start.sh -f"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Live-API/LAS.git"
   },
-  "author": "",
+  "author": "LiveAPI",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Live-API/LAS/issues"
@@ -23,6 +24,7 @@
     "axios": "^0.16.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
+    "commander": "^2.11.0",
     "crawler": "^1.0.5",
     "express": "^4.15.3",
     "mongodb": "^2.2.30",
