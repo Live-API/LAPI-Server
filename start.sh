@@ -2,31 +2,29 @@
 
 #!/bin/bash
 
-# Check if directory is empty, or if the user would like to install in an directory
-# Assuming that if node_modules exists, the app is installed
-if [ ! -d "node_modules" ]; then
-  target='./'
-  if find "$target" -mindepth 1 -print -quit | grep -q .; then
-    echo "The current directory is not empty. Would you like to install anyway? (y/n)"
-    while :
-      do
-        read INPUT_STRING
-        case $INPUT_STRING in
-        y)
-          break
-          ;;
-        n)
-          echo "Exiting..."
-          exit
-          ;;
-        *)
-          echo "Sorry, I don't understand"
-          echo "The current directory is not empty. Would you like to install anyway? (y/n)"
-          ;;
-        esac
-      done
-  fi
-fi
+# Install in LAPI_server folder
+INSTALL_PATH="LAPI_server"
+
+# If given a directory with the -p flag, install in that directory
+while getopts ":p:" opt; do
+  case $opt in
+    p)
+      echo "Installing in folder: $OPTARG"
+      INSTALL_PATH=$OPTARG
+      ;;
+    :)
+      echo "Please specify a path when using the path (-p) flag. Exiting..." >&2
+      exit
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" 
+      ;;
+  esac
+done
+
+mkdir -p $INSTALL_PATH
+cd $INSTALL_PATH
+
 # Install NodeJS (use https://gist.github.com/isaacs/579814)
 
 # Install npm (probably included with Node)
@@ -35,6 +33,11 @@ fi
 echo Installing dependencies from npm
 npm install
 npm install webpack -g
+
+# Add/update hidden status file
+touch .LAS_status
+echo "Latest Update:" > .LAS_status
+echo `date` > .LAS_status
 
 # Build bundles
 echo Bundling React components
