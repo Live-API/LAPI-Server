@@ -43,6 +43,7 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
   echo Installing dependencies from npm
   npm install
   npm install webpack -g
+  npm install mongodb -g
 
   # Add/update hidden status file
   touch .LAS_status
@@ -54,7 +55,7 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
   webpack
   
   # Set up forwarding to port 4000
-  sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
+  #sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
 fi
 
 # Start server

@@ -1,7 +1,7 @@
 # The purpose of this script is to pull the LAS source form github and prepare it for installation
 
 # Install with:
-# curl -s https://raw.githubusercontent.com/Live-API/LAS/35b6f1cf576f0e67d8c371062325c33ee2688887/bin/pull.sh | bash -s 
+# curl -s https://raw.githubusercontent.com/Live-API/LAS/ea2e2daec2d7ae7f708f2bdc8d0b1a8a121d886a/bin/pull.sh | bash -s 
 
 #!/bin/bash
 
