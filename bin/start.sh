@@ -52,6 +52,9 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
   # Build bundles
   echo Bundling React components
   webpack
+  
+  # Set up forwarding to port 4000
+  sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
 fi
 
 # Start server

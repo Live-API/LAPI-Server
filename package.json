@@ -1,6 +1,6 @@
 {
   "name": "liveapi",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "LiveAPI: A few-click-install, end-to-end scraping server",
   "scripts": {
     "prestart": "pgrep mongod || (mkdir -p db/data && mkdir -p db/logs && mongod --dbpath db/data --fork --logpath db/logs/mongodb.log)",
