@@ -26,6 +26,49 @@ app.get('/config',
   }
 );
 
+/* 
+  
+  For our route, we would define different endpoints, depending on the website we are looking to scrape
+  Brett mentioned how we would eventually support different versions of configuration
+
+*/
+
+/*
+  
+  Post request is used instead of a configuration file.
+  {
+    url:
+    interval:
+    endpoint:
+    text:
+    images:
+    backgroundImages:
+    pagination:
+  }
+
+  PENN'S TO-DOS
+
+  1. Send object w/ text property through POST request to the back-end
+    i.e. {
+      text: [DOM Path, DOM Path, DOM Path]
+      }
+
+  2. Middleware function (startScrapeInterval) will send text property to NodeCrawler
+      - Add parameter on crawlerController
+    
+  3. Crawler will perform scrape on the HTML elements, and send data to MongoDB
+      - Loop through text property for each DOM path provided.
+      - Check if the DOM path is being read by Cheerio
+
+  WEEKEND
+  
+  4. Front-End Stretch Feature
+      - Selection of Nested Elements
+      - Pagination
+      - Images
+      - Background-Images
+*/
+
 app.get('/endpoint', crawlerController.getCache);
 
 app.post('/config/admin', 

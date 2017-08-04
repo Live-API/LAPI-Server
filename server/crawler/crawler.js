@@ -6,7 +6,28 @@ for Cheerio selectors. Document is created using data array, and saved to the Cr
 
 // *** represents items that will be provided by the config file
 
-module.exports = (url, endpointName) => {
+/*
+
+Passing data to the Web Crawler:
+{
+  Text: [ ]
+  Images: [ ]
+  BackgroundImages: [ ]
+  Pagination: Key
+}
+
+Our callback function is divided into different sections:
+
+  Extracting Text for DOM Elements
+  Pagination
+  Images - TBD
+  BackgroundImages - TBD
+  
+  Accessing properties would result in clean data flow
+
+*/
+
+module.exports = (url, endpointName, DomObj) => {
   let data = [];
 
   const c = new NodeCrawler({
@@ -19,8 +40,10 @@ module.exports = (url, endpointName) => {
         async function extractData() {
           try {
             // *** Selectors for DOM elements
+            // Text only
+            // JSON.stringify => added the await section
             await $('.cardDetails').each((index, element) => {
-                data.push($(element).text());
+              data.push($(element).text());
             });
             // Support for Pagination
             let href = $('[aria-label="Next page"]').attr('href');
@@ -34,19 +57,19 @@ module.exports = (url, endpointName) => {
                 data: JSON.stringify(data)
               })
               // Replace existing data property if the document exists
-              const cachedData = (await Crawler.find({endpoint: endpointName}));
+              const cachedData = (await Crawler.find({ endpoint: endpointName }));
               if (cachedData.length > 0) {
                 await Crawler.update({
                   endpoint: endpointName
-                }, 
-                { 
-                  $set: { 
-                    data: JSON.stringify(data),
-                    scrape_date: Date.now(),
-                  }
-                });
-              } 
-              
+                },
+                  {
+                    $set: {
+                      data: JSON.stringify(data),
+                      scrape_date: Date.now(),
+                    }
+                  });
+              }
+
               // Create a new document if scraping for the first time
               else {
                 await scrapedData.save();
