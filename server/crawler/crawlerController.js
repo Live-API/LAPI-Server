@@ -43,25 +43,9 @@ const crawlerController = {
   
   // Creates intervals for each endpoint in Intervals collectio
   // May be used when server restarts and intervals should start again
-  // Input: array of endpoints to restart
-    // If no input or empty array, restart all
-  restartScrapes: async function (endpoints) {
-    // Array of endpoints to restart
-    const endpointsToRestart = [];
-    
+  restartIntervals: async function () {    
     // Get all endpoints
-    if (endpoints === undefined || endpoints.length === 0) {
-      endpointsToRestart.concat(await Interval.find({}));
-    }
-    
-    // Get specified endpoints
-    else {
-      endpointsToRestart.concat(
-        endpoints
-          .map(async endpoint => (await Interval.find({ endpoint })))
-          //.filter(doc => doc) // check if doc exists
-      );
-    }
+    const endpointsToRestart = await Interval.find({});
     
     // Restart endpoints
     endpointsToRestart.forEach(endpoint => this.startScrapeInterval(endpoint.endpoint, endpoint.interval));
