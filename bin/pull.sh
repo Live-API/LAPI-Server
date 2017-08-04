@@ -1,5 +1,8 @@
 # The purpose of this script is to pull the LAS source form github and prepare it for installation
 
+# Install with:
+# curl -s https://raw.githubusercontent.com/Live-API/LAS/one-click-install/bin/pull.sh | bash -s 
+
 #!/bin/bash
 
 # Create a LAS directory
@@ -17,12 +20,12 @@ else
   # Ubuntu/Debian
   if hash apt-get 2>/dev/null; then
     echo "Installing Node with apt-get"
-    sudo apt-get install git-all
+    sudo apt-get install -y git-all
   else
     # Enterprise Linus (e.g. Amazon Linux)
     if hash yum 2>/dev/null; then
       echo "Installing Node with yum"
-      sudo yum install git
+      sudo yum -y install git
     fi
   fi
 fi
