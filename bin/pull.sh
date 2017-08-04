@@ -1,14 +1,14 @@
 # The purpose of this script is to pull the LAS source form github and prepare it for installation
 
 # Install with:
-# curl -s https://raw.githubusercontent.com/Live-API/LAS/ea2e2daec2d7ae7f708f2bdc8d0b1a8a121d886a/bin/pull.sh | bash -s 
+# curl -s https://raw.githubusercontent.com/Live-API/LAS/32f88827043e07706abc1048d022aa671fc5ee96/bin/pull.sh | bash -s 
 
 #!/bin/bash
 
 # Create a LAS directory
-INSTALL_DIR='LiveAPI'
-mkdir $INSTALL_DIR
-cd $INSTALL_DIR
+#INSTALL_DIR='LiveAPI'
+#mkdir $INSTALL_DIR
+#cd $INSTALL_DIR
 
 # Install git
 
@@ -34,4 +34,5 @@ fi
 echo "Cloning git repo"
 git clone -b one-click-install --single-branch https://github.com/live-api/las --depth 1
 
-sudo las/bin/start.sh
+cd las
+sudo bin/start.sh
