@@ -43,28 +43,27 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
   
   # Mac OS
   if hash brew 2>/dev/null; then
-    echo "Installing Node with homebrew"
+    echo "Installing MongoDB with homebrew"
     brew install mongodb
   else
     # Ubuntu/Debian
     if hash apt-get 2>/dev/null; then
-      echo "Installing Node with apt-get"
+      echo "Installing MongoDB with apt-get"
       sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
       echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
       sudo apt-get install -y mongodb-org
     else
       # Enterprise Linux (e.g. Amazon Linux)
       if hash yum 2>/dev/null; then
-        echo "Installing Node with yum"
-        echo "[mongodb-org-3.2]
-          name=MongoDB Repository
-          baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.2/x86_64/
-          gpgcheck=1
-          enabled=1
-          gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
-          sudo tee -a /etc/yum.repos.d/mongodb-org-3.2.repo
-        sudo yum -y update && sudo yum install -y mongodb-org-server \
-    mongodb-org-shell mongodb-org-tools
+        echo "Installing MongoDB with yum"
+echo "[mongodb-org-3.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
+            sudo tee -a /etc/yum.repos.d/mongodb-org-3.2.repo
+        sudo yum install -y mongodb-org
       fi
     fi
   fi
