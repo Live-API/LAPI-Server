@@ -6,8 +6,6 @@ mongoose.connect('mongodb://localhost:27017', {
 
 mongoose.Promise = global.Promise;
 
-const INTERVAL = 60;
-
 const crawlerSchema = new Schema({
   endpoint: {type: String, required: true}, // config file
   scrape_date: {type: Date, default: Date.now(), required: true},
