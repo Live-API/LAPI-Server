@@ -6,10 +6,10 @@ mongoose.connect('mongodb://localhost:27017', {
 
 mongoose.Promise = global.Promise;
 
-const crawlerSchema = new Schema({
+const intervalSchema = new Schema({
   endpoint: {type: String, required: true},
   url: {type: String, required: true},
   interval: {type: Number, required: true, default: 600000}, // 10 minute by default
 });
 
-module.exports = mongoose.model("Interval", crawlerSchema);
+module.exports = mongoose.model("Interval", intervalSchema);

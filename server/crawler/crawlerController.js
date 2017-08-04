@@ -36,10 +36,12 @@ const crawlerController = {
     );
     
     // Save the interval to the DB
-    int = new Interval({ endpoint, url, interval });
-    try { await int.save(); }
+    // Upsert (insert if doesn't exist, else update)
+    try { await Interval.update({ endpoint }, { endpoint, url, interval }, { upsert : true }); }
     catch (err) { console.log(err); }
   }
 }
+
+
 
 module.exports = crawlerController;
