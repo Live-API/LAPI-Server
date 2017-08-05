@@ -25,7 +25,7 @@ app.get('/config',
   }
 );
 
-app.get('/endpoint', crawlerController.getCache);
+app.get('/crawls/:endpoint', crawlerController.getCache);
 
 app.post('/config/admin', 
   userController.checkFirstUser,
