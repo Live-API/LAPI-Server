@@ -10,7 +10,7 @@ const intervals = {};
 const crawlerController = {
   getCache: async (req, res) => {
     try {
-      const config = req.query.config;
+      const config = req.param.endpoint;
       // Send document back as JSON object
       res.json(await Crawler.find({"config": config}));
     } catch (err) {
