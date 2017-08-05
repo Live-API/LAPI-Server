@@ -35,6 +35,13 @@ app.post('/config/admin',
   }
 );
 
+// Temporary authentication route
+app.post('/auth', (req, res) => {
+  res.cookie('sid', '123');
+  res.status(200);
+  res.send();
+});
+
 app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
 });
