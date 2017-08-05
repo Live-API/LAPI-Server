@@ -14,6 +14,10 @@ app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
 
+// ----------------------
+// Administration
+// ----------------------
+
 app.get('/', (req, res) => {
     res.send('Home page');
 });
@@ -25,6 +29,23 @@ app.get('/config',
     res.render('createUser', {firstTime: !!res.locals.newUser});
   }
 );
+
+
+// ----------------------
+// Authentication
+// ----------------------
+
+// Temporary authentication route
+app.post('/auth', (req, res) => {
+  res.cookie('sid', '123');
+  res.status(200);
+  res.send('Authenticated!');
+});
+
+
+// ----------------------
+// Crawl endpoints
+// ----------------------
 
 app.get('/crawls/:endpoint', crawlerController.getCache);
 
@@ -38,12 +59,6 @@ app.post('/config/admin',
   }
 );
 
-// Temporary authentication route
-app.post('/auth', (req, res) => {
-  res.cookie('sid', '123');
-  res.status(200);
-  res.send('Authenticated!');
-});
 
 app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
