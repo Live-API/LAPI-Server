@@ -9,8 +9,8 @@ const Schema = mongoose.Schema;
 * could last up to 90 seconds before it's deleted, but still pretty cool!)
 */
 const sessionSchema = new Schema({
-  cookieId: { type: String, required: true, unique: true },
-  createdAt: { type: Date, expires: 30, default: Date.now }
+  cookieId: { type: String, required: true, unique: false },
+  createdAt: { type: Date, expires: 86400, default: Date.now }
 });
 
 module.exports = mongoose.model('Session', sessionSchema);

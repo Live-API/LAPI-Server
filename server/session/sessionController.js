@@ -10,14 +10,17 @@ const sessionController = {};
 */
 sessionController.isLoggedIn = async (req, res, next) => {
   
-  // If session exists for current ssid and if the session is not expired
+  // If session exists for current sid and if the session is not expired
     // Call next
   
-  if (await Session.findOne({cookieId: req.cookies.sid})) next();
+  if (await Session.findById(req.cookies.sid)) next();
   
   // Else
     // Redirect to signup
-  else res.redirect('/signup');
+  else {
+    res.status(401);
+    res.send('Invalid or expired token')
+  }
 
 };
 
@@ -29,9 +32,9 @@ sessionController.isLoggedIn = async (req, res, next) => {
 */
 sessionController.startSession = async (req, res, next) => {
   try {
-    // Save the ssid cookie to the db as a new session model instance
+    // Save the sid cookie to the db as a new session model instance
     const session = new Session({cookieId: res.locals.userId});
-    res.cookie('sid', await session.save()._id);
+    res.cookie('sid',(await session.save())._id);
     next();
   }
   catch (err) {

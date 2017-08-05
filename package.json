@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "commander": "^2.11.0",
+    "cookie-parser": "^1.4.3",
     "crawler": "^1.0.5",
     "express": "^4.15.3",
     "mongodb": "^2.2.30",

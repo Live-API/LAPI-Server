@@ -2,6 +2,7 @@ const express = require('express');
 const pug = require('pug');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const userController = require('./user/userController.js');
 const crawlerController = require('./crawler/crawlerController.js');
 const endpointController = require('./endpoint/endpointController.js');
@@ -14,6 +15,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // ----------------------
 // Home
@@ -33,7 +35,6 @@ app.post('/auth',
   userController.verifyUser,
   sessionController.startSession,
   (req, res) => {
-    console.log(res.locals);
     res.status(200);
     res.send('Authenticated!');
 });
@@ -41,7 +42,6 @@ app.post('/auth',
 app.get('/config', 
   userController.checkFirstUser,
   (req, res) => {
-    console.log(res.locals.newUser);
     res.render('createUser', {firstTime: !!res.locals.newUser});
   }
 );
@@ -61,7 +61,10 @@ app.post('/config/admin',
 
 app.get('/crawls/:endpoint', crawlerController.getCache);
 
-app.post('/crawls', endpointController.setEndpoint);
+app.post('/crawls',
+  sessionController.isLoggedIn,
+  endpointController.setEndpoint
+);
 
 
 app.listen(PORT, () => {
