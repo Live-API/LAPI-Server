@@ -34,7 +34,7 @@ userController.verifyUser = (req, res, next) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     // If it exists continue
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.locals.userid = user._id;
+      res.locals.userId = user._id;
       next(); 
     }
     // Else send an error message

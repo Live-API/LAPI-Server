@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userController = require('./user/userController.js');
 const crawlerController = require('./crawler/crawlerController.js');
 const endpointController = require('./endpoint/endpointController.js');
+const sessionController = require('./session/sessionController.js');
 
 const app = express();
 const PORT = 4000;
@@ -28,10 +29,13 @@ app.get('/', (req, res) => {
 // ----------------------
 
 // Temporary authentication route
-app.post('/auth', (req, res) => {
-  res.cookie('sid', '123');
-  res.status(200);
-  res.send('Authenticated!');
+app.post('/auth',
+  userController.verifyUser,
+  sessionController.startSession,
+  (req, res) => {
+    console.log(res.locals);
+    res.status(200);
+    res.send('Authenticated!');
 });
 
 app.get('/config', 
