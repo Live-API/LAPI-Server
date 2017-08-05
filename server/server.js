@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const userController = require('./user/userController.js');
 const crawlerController = require('./crawler/crawlerController.js');
+const endpointController = require('./endpoint/endpointController.js');
 
 const app = express();
 const PORT = 4000;
@@ -69,7 +70,10 @@ app.get('/config',
       - Background-Images
 */
 
-app.get('/endpoint', crawlerController.getCache);
+app.get('/crawls/:endpoint', crawlerController.getCache);
+
+app.post('/crawls', endpointController.setEndpoint);
+
 
 app.post('/config/admin', 
   userController.checkFirstUser,
@@ -78,6 +82,13 @@ app.post('/config/admin',
     res.send(res.locals.userid);
   }
 );
+
+// Temporary authentication route
+app.post('/auth', (req, res) => {
+  res.cookie('sid', '123');
+  res.status(200);
+  res.send('Authenticated!');
+});
 
 app.listen(PORT, () => {
     console.log(`App is listening on Port ${PORT}`);
