@@ -15,20 +15,12 @@ app.use('/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
 
 // ----------------------
-// Administration
+// Home
 // ----------------------
 
 app.get('/', (req, res) => {
     res.send('Home page');
 });
-
-app.get('/config', 
-  userController.checkFirstUser,
-  (req, res) => {
-    console.log(res.locals.newUser);
-    res.render('createUser', {firstTime: !!res.locals.newUser});
-  }
-);
 
 
 // ----------------------
@@ -42,14 +34,13 @@ app.post('/auth', (req, res) => {
   res.send('Authenticated!');
 });
 
-
-// ----------------------
-// Crawl endpoints
-// ----------------------
-
-app.get('/crawls/:endpoint', crawlerController.getCache);
-
-app.post('/crawls', endpointController.setEndpoint);
+app.get('/config', 
+  userController.checkFirstUser,
+  (req, res) => {
+    console.log(res.locals.newUser);
+    res.render('createUser', {firstTime: !!res.locals.newUser});
+  }
+);
 
 app.post('/config/admin', 
   userController.checkFirstUser,
@@ -58,6 +49,15 @@ app.post('/config/admin',
     res.send(res.locals.userid);
   }
 );
+
+
+// ----------------------
+// Crawl endpoints
+// ----------------------
+
+app.get('/crawls/:endpoint', crawlerController.getCache);
+
+app.post('/crawls', endpointController.setEndpoint);
 
 
 app.listen(PORT, () => {
