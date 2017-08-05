@@ -39,6 +39,16 @@ const crawlerController = {
     // Upsert (insert if doesn't exist, else update)
     try { await Interval.update({ endpoint }, { endpoint, url, interval }, { upsert : true }); }
     catch (err) { console.log(err); }
+  },
+  
+  // Creates intervals for each endpoint in Intervals collectio
+  // May be used when server restarts and intervals should start again
+  restartIntervals: async function () {    
+    // Get all endpoints
+    const endpointsToRestart = await Interval.find({});
+    
+    // Restart endpoints
+    endpointsToRestart.forEach(endpoint => this.startScrapeInterval(endpoint.endpoint, endpoint.interval));
   }
 }
 

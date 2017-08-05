@@ -41,3 +41,4 @@ app.listen(PORT, () => {
 
 // Demo interval scrape
 //crawlerController.startScrapeInterval('pizza', 10000);
+crawlerController.restartIntervals();
