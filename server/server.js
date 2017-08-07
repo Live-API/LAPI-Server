@@ -1,4 +1,7 @@
 const express = require('express');
+const http = require('http');
+const https = require('https');
+const fs = require('fs')
 const pug = require('pug');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -9,7 +12,6 @@ const endpointController = require('./endpoint/endpointController.js');
 const sessionController = require('./session/sessionController.js');
 
 const app = express();
-const PORT = 4000;
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
@@ -73,9 +75,25 @@ app.post('/crawls',
   endpointController.setEndpoint
 );
 
-app.listen(PORT, () => {
-    console.log(`App is listening on Port ${PORT}`);
-});
+
+// ----------------------
+// HTTPS Config
+// ----------------------
+
+const privateKey  = fs.readFileSync('ssl/key.pem', 'utf8');
+const certificate = fs.readFileSync('ssl/cert.pem', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+const HTTP_PORT = 4000;
+const HTTPS_PORT = 4443;
+
+httpServer.listen(HTTP_PORT, () => console.log(`HTTP on port ${HTTP_PORT}`));
+httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS on port ${HTTPS_PORT}`));
+
+//app.listen(PORT, () => {
+//    console.log(`App is listening on Port ${PORT}`);
+//});
 
 // Demo interval scrape
 //crawlerController.startScrapeInterval('pizza', 10000);

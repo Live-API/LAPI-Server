@@ -63,5 +63,8 @@ db/
 # Build files
 client/public/bundles
 
+# SSL Keys
+ssl/
+
 # Hidden file for installation script to know which version is installed
 .LAS_status
