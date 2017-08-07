@@ -72,7 +72,9 @@ app.get('/crawls/:endpoint', crawlerController.getCache);
 
 app.post('/crawls',
   sessionController.isLoggedIn,
-  endpointController.setEndpoint
+  endpointController.setEndpoint,
+  crawlerController.startScrapeInterval
+  // invoke startScrapeInterval
 );
 
 

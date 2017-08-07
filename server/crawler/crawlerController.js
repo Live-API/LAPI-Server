@@ -21,9 +21,11 @@ const crawlerController = {
   
   // Sets up a scrape to run on an interval
   // Currently scrapes trulia only
-  startScrapeInterval: async (endpoint, interval, url) => {
+  startScrapeInterval: async (req, res) => {
     // For test purposes:
-    url = 'https://www.trulia.com/CA/San_Francisco/';
+    const url = req.body.url;
+    const endpoint = req.body.endpoint;
+    const interval = req.body.interval * 1000;
     
     // If the endpoint already has an interval
       // Stop the interval
@@ -41,7 +43,7 @@ const crawlerController = {
     catch (err) { console.log(err); }
   },
   
-  // Creates intervals for each endpoint in Intervals collectio
+  // Creates intervals for each endpoint in Intervals collection
   // May be used when server restarts and intervals should start again
   restartIntervals: async function () {    
     // Get all endpoints
