@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry:  {
+  entry: {
     // Components for '/config' route
     config: path.join(__dirname, 'client/src/config.js'),
   },
@@ -19,8 +19,8 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: [
-            'react', 
-            ['env', { 
+            'react',
+            ['env', {
               "modules": false,
               "targets": {
                 "browsers": ["last 2 Chrome versions"]

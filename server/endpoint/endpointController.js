@@ -1,4 +1,5 @@
 const Endpoint = require('./endpointModel.js');
+const Interval = require('./../crawler/intervalModel.js');
 
 const endpointController = {
   
@@ -12,9 +13,9 @@ const endpointController = {
   // Express middleware
   // If successfully creates (upserts) endpoint in endpoints collection, responds with 200
   // Else responds with 400
-  setEndpoint: async (req, res) => {
+  setEndpoint: async (req, res, next) => {
     try {
-      console.log('Incoming endpoint defintion: ', req.body);
+      console.log('Incoming endpoint definition: ', req.body);
       // Insert if the endpoint doesn't exist, update if it does
       const doc = await Endpoint.update(
         { endpoint: req.body.endpoint },
@@ -27,14 +28,17 @@ const endpointController = {
           pagination: req.body.pagination,
         },
         { upsert : true });
+      console.log('doc', doc);
+      console.log('endpointController', req.body.endpoint);
       res.status(200);
-      res.send(`Endpoint successfully created: ${doc._id}`)
+      res.send(`Endpoint successfully created: /crawls/${req.body.endpoint}`);
     }
     catch (err) {
       console.log('Error saving endpoint: ', err);
       res.status(400)
       res.send(err);
     }
+    next();
   }
   
 }

@@ -23,8 +23,9 @@ app.use(cookieParser());
 // Home
 // ----------------------
 
-app.get('/', (req, res) => {
-    res.send('Home page');
+// Testing this index.html page to get the DOM pointer to work
+app.get('/static', (req, res) => {
+    res.sendFile(path.join(__dirname + './../index.html'));
 });
 
 
@@ -48,6 +49,13 @@ app.get('/config',
   }
 );
 
+/* 
+  
+  For our route, we would define different endpoints, depending on the website we are looking to scrape
+  Brett mentioned how we would eventually support different versions of configuration
+
+*/
+
 app.post('/config/admin', 
   userController.checkFirstUser,
   userController.createUser,
@@ -55,7 +63,6 @@ app.post('/config/admin',
     res.send(res.locals.userid);
   }
 );
-
 
 // ----------------------
 // Crawl endpoints
@@ -65,7 +72,9 @@ app.get('/crawls/:endpoint', crawlerController.getCache);
 
 app.post('/crawls',
   sessionController.isLoggedIn,
-  endpointController.setEndpoint
+  endpointController.setEndpoint,
+  crawlerController.startScrapeInterval
+  // invoke startScrapeInterval
 );
 
 
