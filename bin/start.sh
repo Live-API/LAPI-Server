@@ -82,6 +82,11 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
   echo Bundling React components
   webpack
   
+  # Create SSL Cert
+  echo Generating SSL certificate
+  mkdir ssl
+  openssl req -x509 -newkey rsa:2048 -keyout ssl/key.pem -out ssl/cert.pem -days 365 -nodes
+  
   # Set up forwarding to port 4000
   #sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
 fi
