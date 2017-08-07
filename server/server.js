@@ -74,7 +74,6 @@ app.post('/crawls',
   sessionController.isLoggedIn,
   endpointController.setEndpoint,
   crawlerController.startScrapeInterval
-  // invoke startScrapeInterval
 );
 
 
