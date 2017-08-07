@@ -8,11 +8,11 @@ const NodeCrawler = require('./crawler.js');
 const intervals = {};
 
 const crawlerController = {
-  getCache: async (req, res) => {
+  getCache: async (req, res, next) => {
     try {
-      const config = req.param.endpoint;
+      const endpoint = req.params.endpoint;
       // Send document back as JSON object
-      res.json(await Crawler.find({"config": config}));
+      res.json(await Crawler.find({ endpoint }));
     } catch (err) {
       console.log (err);
     }
