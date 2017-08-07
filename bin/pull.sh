@@ -32,7 +32,7 @@ fi
 
 # Clone the repo
 echo "Cloning git repo"
-git clone -b one-click-install --single-branch https://github.com/live-api/las --depth 1
+git clone -b master --single-branch https://github.com/live-api/las --depth 1
 
 cd las
 sudo bin/start.sh
