@@ -85,7 +85,17 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
   # Create SSL Cert
   echo Generating SSL certificate
   mkdir ssl
-  openssl req -x509 -newkey rsa:2048 -keyout ssl/key.pem -out ssl/cert.pem -days 365 -nodes
+  
+  #Change to your company details
+  country=US
+  state=CA
+  locality=LosAngeles
+  organization=LiveAPI
+  organizationalunit=IT
+  email=test@test.com
+
+  openssl req -x509 -newkey rsa:2048 -keyout ssl/key.pem -out ssl/cert.pem -days 365 -nodes -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+
   
   # Set up forwarding to port 4000
   #sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
