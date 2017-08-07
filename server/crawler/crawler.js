@@ -44,6 +44,9 @@ module.exports = (url, endpoint) => {
         async function extractData() {
           try {
             let text = await EndpointModel.find({ endpoint });
+            // console.log('text', text);
+            // console.log('text[0]', text[0]);
+            // console.log('text[0].text', text[0].text);
             text = text[0].text;
             // *** Selectors for DOM elements
             // Text only
@@ -54,6 +57,8 @@ module.exports = (url, endpoint) => {
             await properties.forEach((property) => {
               domArr = text[property];
               domArr.forEach((element) => {
+                // console.log('element', element);
+                console.log('$(element)', $(element));
                   data.push($(element).text());
               });
             });
