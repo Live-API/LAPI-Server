@@ -98,4 +98,4 @@ httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS on port ${HTTPS_PORT}`))
 
 // Demo interval scrape
 //crawlerController.startScrapeInterval('pizza', 10000);
-crawlerController.restartIntervals();
+// crawlerController.restartIntervals();
