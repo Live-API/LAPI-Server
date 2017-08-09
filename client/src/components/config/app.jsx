@@ -46,7 +46,7 @@ class App extends Component {
     else if (this.state.status === 'login')
       content = <Grid.Column width={8}>><InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/></Grid.Column>;
     else if (this.state.status === 'dashboard')
-      content = <Grid.Column width={15}><Dashboard message={this.state.message}/></Grid.Column>;
+      content = <Grid.Column width={16}><Dashboard message={this.state.message}/></Grid.Column>;
     // So grid elements are centered on entire page
     const gridStyle = { height: '100%' }
     return (
