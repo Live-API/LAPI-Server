@@ -8,8 +8,11 @@ import InfoDialog from './dialog.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      status: this.props.firstTime === 'true' ? 'createAdmin' : 'login'
+    }
   }
-  
+
   // POSTS to server to create the initial admin user
   async createAdmin(data) {
     const route = '/config/admin';
@@ -24,18 +27,17 @@ class App extends Component {
       console.log(err);
     }
   }
-  
+
   render() {
-    
+
     // Is this the first time to this page?
-    const card = this.props.firstTime === 'true' ? 
-          
-      // Display user creation dialog
-      <CreateUserDialog type='administrator' submission={this.createAdmin}/> :
-    
-      // Display the info dialog
-      <InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/>;
-    
+    let card;
+    // Display user creation dialog
+    if (this.state.status === 'createAdmin')
+      card = <CreateUserDialog type='administrator' submission={this.createAdmin}/>;
+    // Display the info dialog
+    else if (this.state.status === 'login')
+      card = <InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/>;
     // So grid elements are centered on entire page
     const gridStyle = { height: '100%' }
     return (

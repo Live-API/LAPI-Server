@@ -48,7 +48,7 @@ app.get('/config',
     // If this is the first time visiting config
     if (res.locals.newUser) res.render('createUser', {firstTime: !!res.locals.newUser});
     // Else prompt to log in
-    else res.render('createUser', {firstTime: !!res.locals.newUser});
+    else res.render('config', {firstTime: !!res.locals.newUser});
   }
 );
 
