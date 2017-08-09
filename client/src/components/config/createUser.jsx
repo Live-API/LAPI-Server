@@ -5,7 +5,7 @@ import { Card, Input, Divider, Button, Form, Icon } from 'semantic-ui-react'
 class CreateUserDialog extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {};
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,13 +22,13 @@ class CreateUserDialog extends Component {
     this.props.submission(this.state);
     event.preventDefault();
   }
-  
+
   render() {
     return (
       <Card fluid color='black'>
         <Card.Content>
           <Card.Header>
-            Create {this.props.type}
+            {this.props.description}
           </Card.Header>
         </Card.Content>
 
