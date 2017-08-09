@@ -42,25 +42,28 @@ app.post('/auth',
     res.send('Authenticated!');
 });
 
-app.get('/config', 
+app.get('/config',
   userController.checkFirstUser,
   (req, res) => {
-    res.render('createUser', {firstTime: !!res.locals.newUser});
+    // If this is the first time visiting config
+    if (res.locals.newUser) res.render('createUser', {firstTime: !!res.locals.newUser});
+    // Else prompt to log in
+    else res.render('createUser', {firstTime: !!res.locals.newUser});
   }
 );
 
-/* 
-  
+/*
+
   For our route, we would define different endpoints, depending on the website we are looking to scrape
   Brett mentioned how we would eventually support different versions of configuration
 
 */
 
-app.post('/config/admin', 
+app.post('/config/admin',
   userController.checkFirstUser,
   userController.createUser,
   (req, res) => {
-    res.send(res.locals.userid);
+    res.send({status: (res.locals.userid ? 'OK' : 'Admin already exists')});
   }
 );
 
