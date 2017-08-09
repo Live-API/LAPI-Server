@@ -46,7 +46,7 @@ app.get('/config',
   userController.checkFirstUser,
   (req, res) => {
     // If this is the first time visiting config
-    if (res.locals.newUser) res.render('createUser', {firstTime: !!res.locals.newUser});
+    if (res.locals.newUser) res.render('config', {firstTime: !!res.locals.newUser});
     // Else prompt to log in
     else res.render('config', {firstTime: !!res.locals.newUser});
   }

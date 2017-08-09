@@ -11,17 +11,20 @@ class App extends Component {
     this.state = {
       status: this.props.firstTime === 'true' ? 'createAdmin' : 'login'
     }
+    this.createAdmin = this.createAdmin.bind(this);
   }
 
   // POSTS to server to create the initial admin user
   async createAdmin(data) {
+    console.log(this);
     const route = '/config/admin';
 //    const request = new XMLHttpRequest();
 //    request.open('POST', route, true);
 //    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 //    request.send(data);
     try {
-      console.log(await axios.post(route, data));
+      const status = (await axios.post(route, data)).data.status;
+      if (status === 'OK') this.setState({status: 'dashboard'});
     }
     catch (err) {
       console.log(err);
@@ -31,19 +34,21 @@ class App extends Component {
   render() {
 
     // Is this the first time to this page?
-    let card;
+    let content;
     // Display user creation dialog
     if (this.state.status === 'createAdmin')
-      card = <CreateUserDialog type='administrator' submission={this.createAdmin}/>;
+      content = <CreateUserDialog type='administrator' submission={this.createAdmin}/>;
     // Display the info dialog
     else if (this.state.status === 'login')
-      card = <InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/>;
+      content = <InfoDialog header='Configuration' description='Administrator account already exists.' link='http://github.com/live-api/las/' linkText='Take me to the documentation'/>;
+    else if (this.state.status === 'dashboard')
+      content = <div>'Dashboard here!'</div>
     // So grid elements are centered on entire page
     const gridStyle = { height: '100%' }
     return (
       <Grid centered verticalAlign='middle' columns={2} style={gridStyle}>
         <Grid.Column>
-          {card}
+          {content}
         </Grid.Column>
       </Grid>
     )
