@@ -1,6 +1,6 @@
 const express = require('express');
-const http = require('http');
 const https = require('https');
+const http = require('http');
 const fs = require('fs')
 const pug = require('pug');
 const path = require('path');
@@ -10,6 +10,7 @@ const userController = require('./user/userController.js');
 const crawlerController = require('./crawler/crawlerController.js');
 const endpointController = require('./endpoint/endpointController.js');
 const sessionController = require('./session/sessionController.js');
+const inviteController = require('./invite/inviteController.js');
 
 const app = express();
 
@@ -64,6 +65,15 @@ app.post('/config/admin',
   userController.createUser,
   (req, res) => {
     res.send({status: (res.locals.userid ? 'OK' : 'Admin already exists')});
+  }
+);
+
+// Creates and responds with a new invite id, if the request if authenticated successfully
+app.post('/invite',
+  sessionController.isLoggedIn,
+  inviteController.createInvite,
+  (req, res) => {
+    res.send(res.locals.invite.id);
   }
 );
 
