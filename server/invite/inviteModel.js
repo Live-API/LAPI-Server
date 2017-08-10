@@ -9,7 +9,9 @@ const Schema = mongoose.Schema;
 * could last up to 90 seconds before it's deleted, but still pretty cool!)
 */
 const sessionSchema = new Schema({
-  valid: { type: Boolean, required: true, default: true }
+  valid: { type: Boolean, required: true, default: true, },
+  creator: { type: String, required: true },
+  redeemer: { type: String }
 });
 
 module.exports = mongoose.model('Invite', sessionSchema);
