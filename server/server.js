@@ -69,7 +69,7 @@ app.post('/config/admin',
 );
 
 // Creates and responds with a new invite id, if the request if authenticated successfully
-app.post('/invite',
+app.post('/invites',
   sessionController.isLoggedIn,
   inviteController.createInvite,
   (req, res) => {
@@ -83,9 +83,16 @@ app.post('/invite',
 // );
 
 // Creates a user if given a valid invite ID
-// app.post('/users',
-//
-// );
+app.post('/users',
+  (req, res, next) => { res.locals.inviteId = req.body.inviteId; next() },
+  inviteController.verifyInvite,
+  (req, res, next) => { res.locals.newUser = { username: req.body.username, password: req.body.password}; next() },
+  userController.createUser,
+  inviteController.redeemInvite,
+  (req, res) => {
+    res.send({status: (res.locals.userid ? 'OK' : 'Something went wrong')});
+  }
+);
 
 // ----------------------
 // Crawl endpoints

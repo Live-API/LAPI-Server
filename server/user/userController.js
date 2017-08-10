@@ -19,8 +19,8 @@ userController.createUser = async (req, res, next) => {
     next();
   } catch (err) {
     // Send an error message
-    console.log('failure!', err);
-    res.send(err);
+    console.log('Failure to create user', err);
+    res.status(500).send('Failed to create user');
   }
 };
 
