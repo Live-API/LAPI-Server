@@ -10,8 +10,8 @@ const Schema = mongoose.Schema;
 */
 const sessionSchema = new Schema({
   valid: { type: Boolean, required: true, default: true, },
-  creator: { type: String, required: true },
-  redeemer: { type: String }
+  creator: { type: String, required: false },
+  redeemer: { type: String, required: false }
 });
 
 module.exports = mongoose.model('Invite', sessionSchema);

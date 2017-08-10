@@ -77,6 +77,16 @@ app.post('/invite',
   }
 );
 
+// Directs to a signup page for valid invite
+// app.get('/invite/:invideId',
+//
+// );
+
+// Creates a user if given a valid invite ID
+// app.post('/users',
+//
+// );
+
 // ----------------------
 // Crawl endpoints
 // ----------------------
