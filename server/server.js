@@ -47,9 +47,9 @@ app.get('/config',
   userController.checkFirstUser,
   (req, res) => {
     // If this is the first time visiting config
-    if (res.locals.newUser) res.render('config', {firstTime: !!res.locals.newUser});
+    if (res.locals.newUser) res.render('config', {status: !!res.locals.newUser ? 'createAdmin' : 'login'});
     // Else prompt to log in
-    else res.render('config', {firstTime: !!res.locals.newUser});
+    else res.render('config', {status: !!res.locals.newUser ? 'createAdmin' : 'login'});
   }
 );
 
@@ -79,7 +79,7 @@ app.post('/invites',
 
 // Directs to a signup page for valid invite
 // app.get('/invite/:invideId',
-//
+//  inviteController.openInvite
 // );
 
 // Creates a user if given a valid invite ID

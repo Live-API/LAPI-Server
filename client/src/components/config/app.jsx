@@ -10,8 +10,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: this.props.firstTime === 'true' ? 'createAdmin' : 'login'
+      status: this.props.status
     }
+    console.log(this.state);
     this.createAdmin = this.createAdmin.bind(this);
     this.authenticate = this.authenticate.bind(this);
   }

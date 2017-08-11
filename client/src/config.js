@@ -9,6 +9,6 @@ const randomGradient = () => {
 document.getElementById('root').setAttribute('style', randomGradient());
 
 render(
-  <App firstTime={firstTime} />,
+  <App status={status} />,
   document.getElementById('root')
 );
