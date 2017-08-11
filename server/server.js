@@ -17,6 +17,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
+app.use('/invites/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -77,10 +78,12 @@ app.post('/invites',
   }
 );
 
-// Directs to a signup page for valid invite
-// app.get('/invite/:invideId',
-//  inviteController.openInvite
-// );
+// Renders a signup page for valid invite
+app.get('/invites/:inviteId',
+  (req, res, next) => { res.locals.inviteId = req.params.inviteId; next() },
+  inviteController.verifyInvite,
+  (req, res) => (res.render('config', { status: 'createUser' }))
+);
 
 // Creates a user if given a valid invite ID
 app.post('/users',

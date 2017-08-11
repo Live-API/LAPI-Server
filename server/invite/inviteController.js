@@ -14,7 +14,7 @@ inviteController.createInvite = async (req, res, next) => {
 // Updates invite with redeemer's ID
 inviteController.redeemInvite = async (req, res, next) => {
   // Update invite
-  try { await Invite.findByIdAndUpdate(res.locals.invite, { redeemer: res.locals.userid }); next() }
+  try { await Invite.findByIdAndUpdate(res.locals.inviteId, { redeemer: res.locals.userid }); next() }
   // Else pass along error
   catch (err) { res.status(500).send() }
 }
