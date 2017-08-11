@@ -19,6 +19,7 @@ mongoose.Promise = global.Promise;
 
 const endpointSchema = new Schema({
   endpoint: {type: String, required: true, unique: true},
+  creator: {type: String},
   url: {type: String, default: Date.now(), required: true},
   text: {type: Object, required: false},
   images: {type: Object, required: false},

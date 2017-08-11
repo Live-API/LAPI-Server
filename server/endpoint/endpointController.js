@@ -2,14 +2,14 @@ const Endpoint = require('./endpointModel.js');
 const Interval = require('./../crawler/intervalModel.js');
 
 const endpointController = {
-  
+
   // Retrieves an endpoint definition for a given endpoint name
   // If none found, returns null
   getEndpoint: async endpoint => {
     try { return await Endpoint.findOne({endpoint}); }
     catch (err) { return null; }
   },
-  
+
   // Express middleware
   // If successfully creates (upserts) endpoint in endpoints collection, responds with 200
   // Else responds with 400
@@ -21,6 +21,7 @@ const endpointController = {
         { endpoint: req.body.endpoint },
         {
           endpoint: req.body.endpoint,
+          creator: res.locals.userId,
           url: req.body.url,
           text: req.body.text,
           images: req.body.images,
@@ -40,7 +41,7 @@ const endpointController = {
     }
     next();
   }
-  
+
 }
 
 module.exports = endpointController;
