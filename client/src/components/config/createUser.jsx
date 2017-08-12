@@ -40,7 +40,7 @@ class CreateUserDialog extends Component {
             </Form.Field>
             <Form.Field>
               <label>Password</label>
-              <Input fluid icon='lock' iconPosition='left' placeholder='Password' name='password' onChange={this.handleChange} />
+              <Input type='password' fluid icon='lock' iconPosition='left' placeholder='Password' name='password' onChange={this.handleChange} />
             </Form.Field>
             <Divider />
             <Button fluid color='green' type='submit'>Register</Button>
