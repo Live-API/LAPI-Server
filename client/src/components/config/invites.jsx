@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Container, Button, Input } from 'semantic-ui-react'
 
 // A form for creation of invites
@@ -9,6 +10,7 @@ class Invites extends Component {
     super()
     this.generateInvite = this.generateInvite.bind(this);
     this.state = { inviteId: null };
+    this.domain = window.location.href.match(/(https?:\/\/[^\/]*)/)[0];
   }
 
   async generateInvite() {
@@ -24,19 +26,30 @@ class Invites extends Component {
   }
 
   render() {
-    return  (
+    const content = this.state.inviteId ? 'Copy Link' : 'Generate Invite Link';
+    const onClick = this.state.inviteId ? console.log : this.generateInvite;
+    const otherAttrs = {};
+    const inviteUrl = `${this.domain}/invites/${this.state.inviteId}`;
+    if (this.state.inviteId) otherAttrs.label = inviteUrl;
+
+    const button = <Button
+      content= {content}
+      icon='mail'
+      onClick= {onClick}
+      {...otherAttrs}
+    />;
+
+
+  // If the invite has been generated, wrap the button in a CopyToClipboard
+    return this.state.inviteId ? (
       <Container>
-        <Button
-          content='Create Invite Link'
-          icon='mail'
-          attached='left'
-          onClick={this.generateInvite}
-        />
-        <Input
-          action={{ color: 'teal', labelPosition: 'right', icon: 'copy', content: 'Copy' }}
-          placeholder={this.state.inviteId ? `/invites/${this.state.inviteId}` : '' }
-          disabled
-        />
+        <CopyToClipboard text={inviteUrl}>
+          {button}
+        </CopyToClipboard>
+      </Container>
+    ) : (
+      <Container>
+        {button}
       </Container>
     );
   }
