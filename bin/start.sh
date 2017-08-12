@@ -18,7 +18,7 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
 
   # Install NodeJS
   # Checks for and uses brew or apt-get. Else may use https://gist.github.com/isaacs/579814
-  
+
   # Mac OS
   if hash brew 2>/dev/null; then
     echo "Installing Node with homebrew"
@@ -38,9 +38,9 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
       fi
     fi
   fi
-  
+
   # Install MongoDB
-  
+
   # Mac OS
   if hash brew 2>/dev/null; then
     echo "Installing MongoDB with homebrew"
@@ -81,22 +81,11 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
   # Build bundles
   echo Bundling React components
   webpack
-  
+
   # Create SSL Cert
   echo Generating SSL certificate
-  mkdir ssl
-  
-  #Change to your company details
-  country=US
-  state=CA
-  locality=LosAngeles
-  organization=LiveAPI
-  organizationalunit=IT
-  email=test@test.com
+  bin/ssl-self-signed.sh
 
-  openssl req -x509 -newkey rsa:2048 -keyout ssl/key.pem -out ssl/cert.pem -days 365 -nodes -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-
-  
   # Set up forwarding to port 4000
   #sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
 fi

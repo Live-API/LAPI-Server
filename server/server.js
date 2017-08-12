@@ -18,6 +18,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
 app.use('/invites/static', express.static(path.join(__dirname, '../client/public')));
+app.use('/', express.static(path.join(__dirname, '../ssl/public')));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
