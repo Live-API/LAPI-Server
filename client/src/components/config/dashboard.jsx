@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Grid, Segment, Menu, Header, Label, Divider } from 'semantic-ui-react'
+import { Grid, Segment, Menu, Header, Label, Divider } from 'semantic-ui-react';
+import Invites from './invites.jsx';
 
 class Dashboard extends Component {
 
@@ -25,6 +26,7 @@ class Dashboard extends Component {
               </Menu>
             </Grid.Column>
             <Grid.Column width={12}>
+              <Invites />
             </Grid.Column>
           </Grid>
         </Segment>
