@@ -19,15 +19,18 @@ else
     sudo apt-get install certbot
 
   else
-    # Enterprise Linus (e.g. Amazon Linux)
+    # Enterprise Linux (e.g. Amazon Linux)
     if hash yum 2>/dev/null; then
       echo "Installing Certbot with yum"
-      yum -y install yum-utils
-      yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
-      sudo yum install certbot
+      mkdir certbot
+      cd certbot
+      wget https://dl.eff.org/certbot-auto
+      chmod a+x certbot-auto
     fi
   fi
 fi
 
 # Generate certs
-letsencrypt --webroot -w ./ssl/public -d liveapi.beekley.xyz
+./certbot/certbot-auto --webroot -w ./ssl/public -d liveapi.beekley.xyz
+
+cd ..

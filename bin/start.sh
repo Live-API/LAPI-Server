@@ -30,7 +30,7 @@ if [ "$FORCE_REINSTALL" == "true" ] || [ ! -f .LAS_status ]; then
       curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       sudo apt-get install -y nodejs
     else
-      # Enterprise Linus (e.g. Amazon Linux)
+      # Enterprise Linux (e.g. Amazon Linux)
       if hash yum 2>/dev/null; then
         echo "Installing Node with yum"
         curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
