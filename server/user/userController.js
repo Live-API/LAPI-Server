@@ -19,8 +19,8 @@ userController.createUser = async (req, res, next) => {
     next();
   } catch (err) {
     // Send an error message
-    console.log('failure!', err);
-    res.send(err);
+    console.log('Failure to create user', err);
+    res.status(500).send('Failed to create user');
   }
 };
 
@@ -35,10 +35,11 @@ userController.verifyUser = (req, res, next) => {
     // If it exists continue
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
       res.locals.userId = user._id;
-      next(); 
+      next();
     }
     // Else send an error message
     else {
+      res.status(401);
       res.send('Incorrect username or password');
     }
   });

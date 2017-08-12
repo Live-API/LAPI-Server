@@ -1,6 +1,6 @@
 const express = require('express');
-const http = require('http');
 const https = require('https');
+const http = require('http');
 const fs = require('fs')
 const pug = require('pug');
 const path = require('path');
@@ -10,12 +10,14 @@ const userController = require('./user/userController.js');
 const crawlerController = require('./crawler/crawlerController.js');
 const endpointController = require('./endpoint/endpointController.js');
 const sessionController = require('./session/sessionController.js');
+const inviteController = require('./invite/inviteController.js');
 
 const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client/views'));
 app.use('/static', express.static(path.join(__dirname, '../client/public')));
+app.use('/invites/static', express.static(path.join(__dirname, '../client/public')));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -42,25 +44,56 @@ app.post('/auth',
     res.send('Authenticated!');
 });
 
-app.get('/config', 
+app.get('/config',
   userController.checkFirstUser,
   (req, res) => {
-    res.render('createUser', {firstTime: !!res.locals.newUser});
+    // If this is the first time visiting config
+    if (res.locals.newUser) res.render('config', {status: !!res.locals.newUser ? 'createAdmin' : 'login'});
+    // Else prompt to log in
+    else res.render('config', {status: !!res.locals.newUser ? 'createAdmin' : 'login'});
   }
 );
 
-/* 
-  
+/*
+
   For our route, we would define different endpoints, depending on the website we are looking to scrape
   Brett mentioned how we would eventually support different versions of configuration
 
 */
 
-app.post('/config/admin', 
+app.post('/config/admin',
   userController.checkFirstUser,
   userController.createUser,
   (req, res) => {
-    res.send(res.locals.userid);
+    res.send({status: (res.locals.userid ? 'OK' : 'Admin already exists')});
+  }
+);
+
+// Creates and responds with a new invite id, if the request if authenticated successfully
+app.post('/invites',
+  sessionController.isLoggedIn,
+  inviteController.createInvite,
+  (req, res) => {
+    res.send(res.locals.invite.id);
+  }
+);
+
+// Renders a signup page for valid invite
+app.get('/invites/:inviteId',
+  (req, res, next) => { res.locals.inviteId = req.params.inviteId; next() },
+  inviteController.verifyInvite,
+  (req, res) => (res.render('config', { status: 'createUser' }))
+);
+
+// Creates a user if given a valid invite ID
+app.post('/users',
+  (req, res, next) => { res.locals.inviteId = req.body.inviteId; next() },
+  inviteController.verifyInvite,
+  (req, res, next) => { res.locals.newUser = { username: req.body.username, password: req.body.password}; next() },
+  userController.createUser,
+  inviteController.redeemInvite,
+  (req, res) => {
+    res.send({status: (res.locals.userid ? 'OK' : 'Something went wrong')});
   }
 );
 
