@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import CreateUserDialog from './createUser.jsx';
 import InfoDialog from './dialog.jsx';
-import Dashboard from './dashboard.jsx';
+import Dashboard from './miniDashboard.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -54,13 +54,11 @@ class App extends Component {
     const route = '/auth';
     try {
       const response = (await axios.post(route, data));
-      console.log(response);
       if (response.status === 200) this.setState({
         status: 'dashboard',
         message: 'Successfully logged in'
       });
       else this.setState({error: 'Incorrect Username or Password'});
-      console.log(this.state)
     }
     catch (err) {
       console.log(err);

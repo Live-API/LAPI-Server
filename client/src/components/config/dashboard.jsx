@@ -5,6 +5,8 @@ import Invites from './invites.jsx';
 
 class Dashboard extends Component {
 
+  // A larger dashboard that can be used when we have more content to put on it
+
   render() {
     let message = null;
     if (this.props.message) message = <Menu.Item><Label>{this.props.message}</Label></Menu.Item>;
