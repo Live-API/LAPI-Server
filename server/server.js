@@ -122,7 +122,7 @@ const httpsServer = https.createServer(credentials, app);
 const HTTP_PORT = 4000;
 const HTTPS_PORT = 4443;
 
-httpServer.listen(HTTP_PORT, () => console.log(`HTTP on port ${HTTP_PORT}`));
+module.exports = httpServer.listen(HTTP_PORT, () => console.log(`HTTP on port ${HTTP_PORT}`));
 httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS on port ${HTTPS_PORT}`));
 
 //app.listen(PORT, () => {
