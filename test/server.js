@@ -37,10 +37,10 @@ describe('User Creation (\"Authentication\" routes in server.js)', function() {
     .post('/config/admin')
     .field('username', 'test' + Math.floor(100 * Math.random()))
     .field('password', 'test')
-    .end(function(err, res){
+    .end(async (err, res) => {
       res.should.have.status(200);
       res.should.be.json;
-      
+      (await User.find({})).length.should.be.above(0);
       done();
     });
   });
