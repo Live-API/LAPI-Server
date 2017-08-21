@@ -16,7 +16,7 @@ describe('User Creation (\"Authentication\" routes in server.js)', function() {
   it('should successfully send html page on /config GET', done => {
     chai.request(server)
     .get('/config')
-    .end(function(err, res){
+    .end((err, res) => {
       res.should.have.status(200);
       res.should.be.html;
       done();
@@ -26,7 +26,7 @@ describe('User Creation (\"Authentication\" routes in server.js)', function() {
   it('should send bundled js for the /config page', done => {
     chai.request(server)
     .get('/static/bundles/config.bundle.js')
-    .end(function(err, res){
+    .end((err, res) => {
       res.should.have.status(200);
       done();
     });
@@ -35,8 +35,7 @@ describe('User Creation (\"Authentication\" routes in server.js)', function() {
   it('should create admin if no users in db, without requiring cookies', done => {
     chai.request(server)
     .post('/config/admin')
-    .field('username', 'test' + Math.floor(100 * Math.random()))
-    .field('password', 'test')
+    .send({'username': 'test', 'password': 'test'})
     .end(async (err, res) => {
       res.should.have.status(200);
       res.should.be.json;
@@ -45,5 +44,7 @@ describe('User Creation (\"Authentication\" routes in server.js)', function() {
     });
   });
   // Can we generate an invite?
-  // it('should ');
+  it('should be able to generate a user creation invite', done => {
+    done();
+  });
 });

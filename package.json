@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "LiveAPI: A few-click-install, end-to-end scraping server",
   "scripts": {
-    "prestart": "pgrep mongod || (mkdir -p db/data && mkdir -p db/logs && mongod --dbpath db/data --fork --logpath db/logs/mongodb.log)",
+    "prestart": "mkdir -p db/data && mkdir -p db/logs && pgrep mongod || (mkdir -p db/data && mkdir -p db/logs && mongod --dbpath db/data --fork --logpath db/logs/mongodb.log)",
     "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --colors -w",
