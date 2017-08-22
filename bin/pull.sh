@@ -1,7 +1,7 @@
 # The purpose of this script is to pull the LAS source form github and prepare it for installation
 
 # Install with:
-# curl -s https://raw.githubusercontent.com/Live-API/LAS/4b82aa830d5691f1815f5660d99d3198c3bc4849/bin/pull.sh | bash -s 
+# curl -s https://raw.githubusercontent.com/Live-API/LAS/4b82aa830d5691f1815f5660d99d3198c3bc4849/bin/pull.sh | bash -s
 
 #!/bin/bash
 
@@ -14,17 +14,17 @@
 
 # Mac OS
 if hash brew 2>/dev/null; then
-  echo "Installing Node with homebrew"
+  echo "Installing git with homebrew"
   brew install git
 else
   # Ubuntu/Debian
   if hash apt-get 2>/dev/null; then
-    echo "Installing Node with apt-get"
+    echo "Installing git with apt-get"
     sudo apt-get install -y git-all
   else
     # Enterprise Linus (e.g. Amazon Linux)
     if hash yum 2>/dev/null; then
-      echo "Installing Node with yum"
+      echo "Installing git with yum"
       sudo yum -y install git
     fi
   fi
