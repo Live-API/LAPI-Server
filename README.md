@@ -21,4 +21,5 @@ LiveAPI server can be also installed manually using the following steps.
 1. Install git, NodeJS and MongoDB
 2. Clone this repository
 3. Run `npm install` in the cloned folder
-4. Run `npm start`
+4. Run `npm run update`
+5. To start the server in the future, run `npm start`
